@@ -74,3 +74,4 @@ DURABILITY(實體化資料) 有SCHEMA_ONLY、SCHEMA_AND_DATA 兩種模式
 [記憶體資料表使用快照隔離時的查詢一致性與衝突](https://dotblogs.com.tw/stanley14/2017/12/16/memoryoptimized_table_snapshot)  
 [No Need Conver Index on In-Memory Table](https://dotblogs.com.tw/ricochen/2017/11/11/170549) 
 [In-Memory OLTP in SQL Server: Logging Comparison with Disk-Based Tables](http://www.edwinmsarmiento.com/in-memory-oltp-in-sql-server-logging/)  
+[記憶體最佳化資料表的還原與復原](https://docs.microsoft.com/zh-tw/sql/relational-databases/in-memory-oltp/restore-and-recovery-of-memory-optimized-tables?view=sql-server-2016)
