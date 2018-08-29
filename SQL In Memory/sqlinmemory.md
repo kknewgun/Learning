@@ -38,6 +38,8 @@ DURABILITY(實體化資料) 有SCHEMA_ONLY、SCHEMA_AND_DATA 兩種模式
 3. 無法跨資料庫交易和查詢、可以跟disk  table進行join
 4. BUCKET_COUNT 大小須妥善評估；太大浪費記憶體，太小影響效能(尤其是批次新增)。建議大小:索引鍵的兩倍。  
 5. SQL 2014 修改Bucket 只能DROP Table and CREATE。SQL 2016可以ALERT rebuild index  
+6. 不支援鏡像  
+
 
 
 * 測試範例  
@@ -55,3 +57,20 @@ DURABILITY(實體化資料) 有SCHEMA_ONLY、SCHEMA_AND_DATA 兩種模式
 ![Fix In-Memory Table BUCKET_COUNT](imgs/p6.png)  
 7. Retry Update 1000000 data  
 ![Retry Update 1000000 data](imgs/p7.png)  
+
+
+* 參考文獻  
+[內存中OLTP變形記](https://read01.com/zh-tw/LdMND6.html#.W4NX--gzaUk)  
+[Azure 使用 SQL Database 中的記憶體內部技術將效能最佳化](https://docs.microsoft.com/zh-tw/azure/sql-database/sql-database-in-memory)  
+[善用 In-Memory 資料表變數提高效能](https://dotblogs.com.tw/ricochen/2017/02/25/220430)  
+[SQL2014和SQL2016 In-Memory OLTP比較](https://dotblogs.com.tw/ricochen/2017/04/15/161444)  
+[交易複寫和 In-memory OLTP](https://dotblogs.com.tw/ricochen/2018/01/01/062037)  
+[In-Memory Optimized database backup and restore in SQL Server](https://www.sqlshack.com/in-memory-optimized-database-backup-and-restore-in-sql-server/)  
+[In-Memory Engine DURABILITY = SCHEMA_ONLY And Transaction Rollback](https://chrisadkin.io/2017/07/17/in-memory-engine-durability-schema_only-and-transaction-rollback/)  
+[In-Memory Table檔案群組和檔案規劃考量](https://dotblogs.com.tw/ricochen/2017/04/10/021222)  
+[為記憶體最佳化的物件定義持久性](https://docs.microsoft.com/zh-tw/sql/relational-databases/in-memory-oltp/defining-durability-for-memory-optimized-objects?view=sql-server-2017)  
+[記憶內資料表BUCKET_COUNT預估](https://dotblogs.com.tw/stanley14/2016/10/28/234914)  
+[SQL Server 2016 記憶體內部 OLTP 不支援的功能](https://docs.microsoft.com/zh-tw/sql/relational-databases/in-memory-oltp/unsupported-sql-server-features-for-in-memory-oltp?view=sql-server-2016)  
+[記憶體資料表使用快照隔離時的查詢一致性與衝突](https://dotblogs.com.tw/stanley14/2017/12/16/memoryoptimized_table_snapshot)  
+[No Need Conver Index on In-Memory Table](https://dotblogs.com.tw/ricochen/2017/11/11/170549) 
+[In-Memory OLTP in SQL Server: Logging Comparison with Disk-Based Tables](http://www.edwinmsarmiento.com/in-memory-oltp-in-sql-server-logging/)  
