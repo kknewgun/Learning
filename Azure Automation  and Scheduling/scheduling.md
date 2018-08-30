@@ -16,6 +16,8 @@
 ![Add new Runbook](imgs/p8.png)  
 9. Write your powershell  
 ![Write your powershell](imgs/p9.png)  
+powershell 內容  
+![powershell](imgs/p9-2.png)  
 10. Run Test  
 ![Run Test](imgs/p10.png)  
 11. Click Start  
