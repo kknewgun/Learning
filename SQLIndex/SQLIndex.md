@@ -97,3 +97,9 @@ SQL SERVER 所有索引基本上都是使用B-TREE結構，除了 xml 索引、�
 3. 異動頻率一般的資料表: 設定 85%~90%
 4. 異動頻率很高的資料表: 設定 50%-80%  
 
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+      
+</video>
