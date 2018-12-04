@@ -32,7 +32,7 @@ Clusterd-Index 通常一個資料表只能建立一個，為什麼呢? 這是因
 ![Insert Data ](imgs/p2.png)  
 3. Open STATISTICS TIME and STATISTICS TIME  
 ![Insert Data](imgs/p3.png)  
-4. SELECT Data 
+4. SELECT Data  
 ![SELECT Data](imgs/p4.png)  
 5. ADD INDEX  
 ![ADD INDEX](imgs/p5.png)  
@@ -88,7 +88,11 @@ SQL SERVER 所有索引基本上都是使用B-TREE結構，除了 xml 索引、�
 
 假設今天要尋找id 1521這筆資料，SQL SERVER會從根目錄開始搜尋，判斷1521 介於901與2800之間，所以會從901這邊開始搜尋並計算1521的可能位置，指向中繼層(901-1721)再指向分葉層(901-1720)，此時已到最末層，如果id 1521不存在則會回傳找不到。B-tree 的平衡效果，使得 SQL Server 每次在索引內搜尋資料動作時都只會在相同數量的各層索引頁內處理，以利精準地找到所需資料。  
 
-## 填滿因子
+## 叢集索引 VS 非叢集索引
+
+![vs](imgs/p14.png)  
+
+## 填滿因子(Fill Factor)
 
 透過設定填滿因子可以微調索引效能和儲存空間，該因子會決定分葉層頁面填滿資料的空間百分比 (保留每個頁面可用空間)，以利未來資料成長使用，主要目的是要減少頁面分割發生頻率，如設定 90 (預設 0) 表示只預留 10% 空間比例，實務上我建議該值依資料表讀寫特性設定比較有效益，因為設定過低將增加頁面分割頻率，也造成索引碎片過多增加 I/O，進而影響查詢效能且容易發生長時間 Lock 資源情形，但設定過高也會影響資料異動效能，所以建議必須依資料表讀寫特性設定取得一個平衡值，下面是填滿因子建議值：  
 
@@ -97,9 +101,11 @@ SQL SERVER 所有索引基本上都是使用B-TREE結構，除了 xml 索引、�
 3. 異動頻率一般的資料表: 設定 85%~90%
 4. 異動頻率很高的資料表: 設定 50%-80%  
 
-<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
-      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
-      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
-      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
-      
-</video>
+![fill Factor](imgs/p13.png)  
+
+## 索引破碎  
+
+大家都知道，在硬碟上執行刪除、移動檔案..等操作，會為硬碟帶來空間碎片，因為檔案容易破碎，造成檔案寫入空間沒有連續，所以時間一久，就會造成檔案破碎程度越來越大，進而影響資料存取效能(硬碟搜尋時間拉長)。  
+
+同樣的為什麼會發生索引破碎。原因就是我們會不斷的新增刪除資料，相對的索引指向的位置也會做異動。Fill Factor設定100%(不巧，叢集索引又沒設好)，結果在中間又Insert了幾筆資料。就會發現資料不會出現在同一個區塊。導致查詢的過程增加掃描次數，讓查詢變慢。  
+所以定期的索引重建是很重要的。
